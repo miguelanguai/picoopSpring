@@ -1,44 +1,30 @@
 package project.picoop.user;
 
-import java.util.List;
-
-import project.picoop.user.model.UserEntity;
-import project.picoop.user.model.UserDto;
-
 /**
  * @author mguaitav
- * 
  */
 public interface UserService {
 
     /**
-     * Recupera una {@link UserEntity} a partir de su ID
-     *
-     * @param id PK de la entidad
-     * @return {@link UserEntity}
+     * sum application credits to the user
+     * 
+     * @param credits
      */
-    UserEntity get(Long id);
+    public void sumCreditsToUser(int credits);
 
     /**
-     * Método para recuperar todas las {@link UserEntity}
-     *
-     * @return {@link List} de {@link UserEntity}
+     * rest application credits to the user
+     * 
+     * @param credits
      */
-    List<UserEntity> findAll();
+    public void substractCreditsToUser(int credits);
 
     /**
-     * Método para crear o actualizar una {@link UserEntity}
-     *
-     * @param id  PK de la entidad
-     * @param dto datos de la entidad
+     * checks if user has enough credits to pay for an image
+     * 
+     * @param creditsWantedToBePaid
+     * @return boolean
      */
-    void save(Long id, UserDto dto);
-
-    /**
-     * Método para borrar una {@link UserEntity}
-     *
-     * @param id PK de la entidad
-     */
-    void delete(Long id) throws Exception;
+    public boolean isUserAbleToPay(int creditsWantedToBePaid);
 
 }

@@ -1,13 +1,11 @@
 package project.picoop.user;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import project.picoop.user.model.UserEntity;
 
-/**
- * @author mguaitav
- *
- */
-public interface UserRepository extends CrudRepository<UserEntity, Long> {
-
+public interface UserRepository extends JpaRepository<UserEntity, Integer> {
+    Optional<UserEntity> findByEmail(String email);
 }
