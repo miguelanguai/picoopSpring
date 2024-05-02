@@ -1,11 +1,31 @@
 package project.picoop.user;
 
+import java.util.Optional;
+
 import org.springframework.http.ResponseEntity;
+
+import project.picoop.user.model.UserEntity;
 
 /**
  * @author mguaitav
  */
 public interface UserService {
+
+    /**
+     * find User
+     * 
+     * @param id the user id
+     * @return {@link UserEntity}
+     */
+    public Optional<UserEntity> findUserById(Integer id);
+
+    /**
+     * find User
+     * 
+     * @param string the username
+     * @return {@link UserEntity}
+     */
+    public UserEntity findUserByUsername(String username);
 
     // CREDITS
     /**
@@ -52,5 +72,26 @@ public interface UserService {
      * accessing the service
      */
     String getCurrentUserEmail();
+
+    /**
+     * get current session user
+     * 
+     * @return
+     */
+    UserEntity getCurrentUser();
+
+    /**
+     * Get credits current user has
+     * 
+     * @return
+     */
+    public int getCurrentUserCredits();
+
+    /**
+     * Set credits of current user (to test getCurrentUser)
+     * 
+     * @param credits
+     */
+    public void setCurrentUserCredits(int credits);
 
 }

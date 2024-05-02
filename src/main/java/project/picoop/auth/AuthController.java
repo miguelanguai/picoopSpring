@@ -46,4 +46,15 @@ public class AuthController {
     public ResponseEntity<ReqRes> refreshToken(@RequestBody ReqRes refreshTokenRequest) {
         return ResponseEntity.ok(authService.refreshToken(refreshTokenRequest));
     }
+
+    /**
+     * It ends the session for the user
+     * 
+     * @param signOutRequest
+     * @return
+     */
+    @PostMapping("/signout")
+    public ResponseEntity<ReqRes> signOut(@RequestBody ReqRes signOutRequest) {
+        return ResponseEntity.ok(authService.signOut(signOutRequest));
+    }
 }

@@ -1,10 +1,13 @@
 package project.picoop.auth;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -107,15 +110,59 @@ public class AuthService {
     }
 
     /**
-     * to get user in session email. Este lo he creado yo
+     * method to sign out. este lo he creado yo
+     * 
+     * @param token
+     * @return response
+     */
+    public ReqRes signOut(ReqRes signoutRequest) {
+        ReqRes response = new ReqRes();
+
+        try {
+            response.setStatusCode(200);
+            response.setMessage("Successfully Signed Out");
+        } catch (Exception e) {
+            response.setStatusCode(500);
+            response.setError(e.getMessage());
+        }
+        return response;
+    }
+
+    // utils
+    // Estos tres metodos siguientes los he creado yo
+    /**
+     * to get user in session email. Este lo he creado yo (explicado por PhegonDev)
      * 
      * @return UserEntity
      */
-    public UserEntity getCurrentUser() {
-
-        String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-
-        return userRepository.findByEmail(userEmail).orElse(null);
+    public static String getCurrentUserEmail() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        return email;
     }
 
+    /**
+     * Set by an AuthenticationManager to indicate the authorities that the
+     * principal has been granted
+     * 
+     * @return the authorities granted to the principal, or an empty collection if
+     *         the token has not been authenticated. Never null.
+     */
+    public static Collection<? extends GrantedAuthority> getCurrentUserAuthority() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        return authorities;
+    }
+
+    /**
+     * Stores additional details about the authentication request. These might be an
+     * IP address, certificate serial number etc.
+     * 
+     * @return Object
+     */
+    public static Object details() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object details = authentication.getDetails(); // get other details e.t.c
+        return details;
+    }
 }

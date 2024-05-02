@@ -1,5 +1,8 @@
 package project.picoop.user;
 
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,13 +16,34 @@ import project.picoop.user.model.UserEntity;
 @Service
 public class UserServiceImpl implements UserService {
 
-    UserEntity userInSession; // esto esta asi para que los metodos de debajo no se rompan
+    @Autowired
+    UserRepository userRepository;
+
+    UserEntity userEntity;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<UserEntity> findUserById(Integer id) {
+        return userRepository.findById(id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UserEntity findUserByUsername(String username) {
+        UserEntity user = userRepository.findByEmail(username).orElse(null);
+        return user;
+    }
 
     /**
      * {@inheritDoc}
      */
     public void sumCreditsToUser(int creditsToSum) {
-        userInSession.setCredits(userInSession.getCredits() + creditsToSum);
+        this.getCurrentUser().setCredits(userEntity.getCredits() + creditsToSum);
+        // me falta guardar los creditos del usuario (o editar el usuario entero)
     }
 
     /**
@@ -27,7 +51,8 @@ public class UserServiceImpl implements UserService {
      */
     public void substractCreditsToUser(int creditsToSubstract) {
         if (isUserAbleToPay(creditsToSubstract)) {
-            userInSession.setCredits(userInSession.getCredits() - creditsToSubstract);
+            this.getCurrentUser().setCredits(userEntity.getCredits() - creditsToSubstract);
+            // me falta guardar los creditos del usuario (o editar el usuario entero)
         }
     }
 
@@ -35,7 +60,7 @@ public class UserServiceImpl implements UserService {
      * {@inheritDoc}
      */
     public boolean isUserAbleToPay(int creditsWantedToBePaid) {
-        if (userInSession.getCredits() < creditsWantedToBePaid) {
+        if (this.getCurrentUser().getCredits() < creditsWantedToBePaid) {
             return false;
         }
         return true;
@@ -68,6 +93,33 @@ public class UserServiceImpl implements UserService {
         System.out.println(authentication.getDetails()); // get remote ip
         System.out.println(authentication.getName()); // returns the email because the email is the unique identifier
         return authentication.getName(); // returns the email
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UserEntity getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserEntity user = userRepository.findByEmail(authentication.getName()).orElse(null);
+        return user;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getCurrentUserCredits() {
+        return this.getCurrentUser().getCredits();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setCurrentUserCredits(int credits) {
+        userRepository.setCurrentUserCredits(this.getCurrentUser().getId(), credits);
+
     }
 
 }
