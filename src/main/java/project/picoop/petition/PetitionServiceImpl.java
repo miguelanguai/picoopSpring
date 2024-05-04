@@ -63,4 +63,13 @@ public class PetitionServiceImpl implements PetitionService {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PetitionEntity findPetitionById(Long petition_id) {
+
+        return petitionRepository.findById(petition_id).orElse(null);
+    }
+
 }

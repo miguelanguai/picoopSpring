@@ -26,4 +26,12 @@ public interface PetitionService {
      */
     void delete(Long id) throws Exception;
 
+    /**
+     * finds a petition by id
+     * 
+     * @param petition_id
+     * @return PetitionEntity
+     */
+    PetitionEntity findPetitionById(Long petition_id);
+
 }
