@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import project.picoop.petition.model.PetitionDto;
 import project.picoop.petition.model.PetitionEntity;
+import project.picoop.user.UserService;
+import project.picoop.user.model.UserEntity;
 
 @Service
 @Transactional
@@ -15,6 +17,9 @@ public class PetitionServiceImpl implements PetitionService {
 
     @Autowired
     PetitionRepository petitionRepository;
+
+    @Autowired
+    UserService userService;
 
     /**
      * {@inheritDoc}
@@ -42,7 +47,12 @@ public class PetitionServiceImpl implements PetitionService {
         petition.setPetitionTitle(dto.getPetitionTitle());
         petition.setPetitionDescription(dto.getPetitionDescription());
         petition.setPetitionDate(dto.getPetitionDate());
-        petition.setUser(dto.getUser());
+        if (dto.getUser() == null) {
+            UserEntity user = userService.getCurrentUser();
+            petition.setUser(user);
+        } else {
+            petition.setUser(dto.getUser());
+        }
 
         this.petitionRepository.save(petition);
 

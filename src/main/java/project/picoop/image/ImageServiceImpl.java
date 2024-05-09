@@ -29,18 +29,18 @@ public class ImageServiceImpl implements ImageService {
     /**
      * {@inheritDoc}
      */
-    public void uploadImage(MultipartFile file, Integer user_id, Long petition_id, String imgTitle, String img_type,
-            String img_description, LocalDate img_uploadingDate, String img_stage, String img_whyDenied)
-            throws IOException {
+    public void uploadImage(MultipartFile file, Long petition_id, String imgTitle, String img_type,
+            String img_description, String img_stage, String img_whyDenied) throws IOException {
         // convert dto to imageEntity
         ImageEntity imageEntity = new ImageEntity();
 
-        imageEntity.setUser(userService.findUserById(user_id).orElse(null));
+        imageEntity.setUser(userService.getCurrentUser());
         imageEntity.setPetition(petitionService.findPetitionById(petition_id));
         imageEntity.setImgTitle(imgTitle);
         imageEntity.setImg_type(img_type);
         imageEntity.setImg_description(img_description);
-        imageEntity.setImg_uploadingDate(img_uploadingDate);
+        LocalDate currentTime = LocalDate.now();
+        imageEntity.setImg_uploadingDate(currentTime);
         imageEntity.setImg_stage(img_stage);
         imageEntity.setImg_whyDenied(img_whyDenied);
 

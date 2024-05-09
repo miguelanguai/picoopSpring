@@ -1,7 +1,6 @@
 package project.picoop.image;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,12 +33,12 @@ public class ImageController {
      * @throws IOException
      */
     @RequestMapping(path = "/user/image", method = RequestMethod.POST)
-    public void uploadImage(@RequestParam MultipartFile file, @RequestParam Integer user_id,
-            @RequestParam Long petition_id, @RequestParam String imgTitle, @RequestParam String img_type,
-            @RequestParam String img_description, @RequestParam LocalDate img_uploadingDate,
+    public void uploadImage(@RequestParam MultipartFile file, @RequestParam Long petition_id,
+            @RequestParam String imgTitle, @RequestParam String img_type, @RequestParam String img_description,
+            // @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate
+            // img_uploadingDate,
             @RequestParam String img_stage, @RequestParam String img_whyDenied) throws IOException {
-        imageService.uploadImage(file, user_id, petition_id, imgTitle, img_type, img_description, img_uploadingDate,
-                img_stage, img_whyDenied);
+        imageService.uploadImage(file, petition_id, imgTitle, img_type, img_description, img_stage, img_whyDenied);
     }
 
     /**
@@ -47,7 +46,7 @@ public class ImageController {
      * 
      * @return List of Images
      */
-    @RequestMapping(path = "/user/image", method = RequestMethod.GET)
+    @RequestMapping(path = "/public/image", method = RequestMethod.GET)
     public List<ImageDto> findAll() {
         List<ImageEntity> images = this.imageService.findAll();
         return images.stream().map(e -> mapper.map(e, ImageDto.class)).collect(Collectors.toList());
