@@ -35,8 +35,6 @@ public class ImageController {
     @RequestMapping(path = "/user/image", method = RequestMethod.POST)
     public void uploadImage(@RequestParam MultipartFile file, @RequestParam Long petition_id,
             @RequestParam String imgTitle, @RequestParam String img_type, @RequestParam String img_description,
-            // @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate
-            // img_uploadingDate,
             @RequestParam String img_stage, @RequestParam String img_whyDenied) throws IOException {
         imageService.uploadImage(file, petition_id, imgTitle, img_type, img_description, img_stage, img_whyDenied);
     }
