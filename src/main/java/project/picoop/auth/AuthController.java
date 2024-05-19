@@ -2,6 +2,7 @@ package project.picoop.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,5 +57,15 @@ public class AuthController {
     @PostMapping("/signout")
     public ResponseEntity<ReqRes> signOut(@RequestBody ReqRes signOutRequest) {
         return ResponseEntity.ok(authService.signOut(signOutRequest));
+    }
+
+    /**
+     * It returns the current user mail
+     * 
+     * @return
+     */
+    @GetMapping("/username")
+    public String getCurrentUserEmail() {
+        return AuthService.getCurrentUserEmail();
     }
 }
