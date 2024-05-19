@@ -29,4 +29,12 @@ public interface ImageService {
      */
     public List<ImageEntity> findAll();
 
+    /**
+     * gets a filtered list of images
+     * 
+     * @param text filter applied which is on the title or the description
+     * @return List of Images
+     */
+    public List<ImageEntity> findFiltered(String text);
+
 }

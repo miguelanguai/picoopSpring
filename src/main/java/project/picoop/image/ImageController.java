@@ -50,4 +50,16 @@ public class ImageController {
         return images.stream().map(e -> mapper.map(e, ImageDto.class)).collect(Collectors.toList());
     }
 
+    /**
+     * calls imageService.findFiltered to return a List of images filtered by name
+     * or description
+     * 
+     * @param text which is going to be the filter
+     * @return List of Images
+     */
+    @RequestMapping(path = "/public/image/filtered", method = RequestMethod.GET)
+    public List<ImageDto> findFiltered(@RequestParam(value = "text", required = true) String text) {
+        List<ImageEntity> images = this.imageService.findFiltered(text);
+        return images.stream().map(e -> mapper.map(e, ImageDto.class)).collect(Collectors.toList());
+    }
 }

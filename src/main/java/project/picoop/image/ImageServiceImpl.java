@@ -64,4 +64,12 @@ public class ImageServiceImpl implements ImageService {
     public List<ImageEntity> findAll() {
         return (List<ImageEntity>) this.imageRepository.findAll();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ImageEntity> findFiltered(String text) {
+        return (List<ImageEntity>) this.imageRepository.findFiltered(text);
+    }
 }
