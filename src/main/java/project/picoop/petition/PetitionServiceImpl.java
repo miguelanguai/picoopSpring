@@ -34,6 +34,14 @@ public class PetitionServiceImpl implements PetitionService {
      * {@inheritDoc}
      */
     @Override
+    public boolean hasImage(Long petitionId) {
+        return petitionRepository.findByPetitionId(petitionId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void save(Long id, PetitionDto dto) {
 
         PetitionEntity petition;

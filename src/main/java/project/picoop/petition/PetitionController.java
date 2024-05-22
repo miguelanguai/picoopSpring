@@ -41,6 +41,17 @@ public class PetitionController {
     }
 
     /**
+     * checks if this petition has images related
+     * 
+     * @param petitionId
+     * @return
+     */
+    @RequestMapping(path = "public/petitions/hasimages/{petitionId}", method = RequestMethod.GET)
+    public boolean hasImages(@PathVariable Long petitionId) {
+        return petitionService.hasImage(petitionId);
+    }
+
+    /**
      * Método para guardar una {@link PetitionEntity}
      */
     @RequestMapping(path = { "user/petitions", "user/petitions/{id}" }, method = RequestMethod.PUT)

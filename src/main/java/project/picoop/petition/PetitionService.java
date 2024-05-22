@@ -15,6 +15,14 @@ public interface PetitionService {
     List<PetitionEntity> findAll();
 
     /**
+     * returns a boolean saying if the petition passed as a parameter has images
+     * 
+     * @param petitionId
+     * @return boolean
+     */
+    boolean hasImage(Long petitionId);
+
+    /**
      * creates or edits a petition
      * 
      * @param dto
