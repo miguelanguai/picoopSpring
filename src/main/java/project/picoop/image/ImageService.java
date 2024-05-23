@@ -37,4 +37,11 @@ public interface ImageService {
      */
     public List<ImageEntity> findFiltered(String text);
 
+    /**
+     * get number of images uploaded to the db
+     * 
+     * @return long uploadedImages
+     */
+    public long getUploadedImages();
+
 }

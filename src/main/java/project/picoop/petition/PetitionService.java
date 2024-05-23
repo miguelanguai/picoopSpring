@@ -42,4 +42,10 @@ public interface PetitionService {
      */
     PetitionEntity findPetitionById(Long petition_id);
 
+    /**
+     * 
+     * @return number of petitions uploaded to the db
+     */
+    long getUploadedPetitions();
+
 }

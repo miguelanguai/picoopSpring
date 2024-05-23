@@ -90,4 +90,12 @@ public class PetitionServiceImpl implements PetitionService {
         return petitionRepository.findById(petition_id).orElse(null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long getUploadedPetitions() {
+        return petitionRepository.count();
+    }
+
 }

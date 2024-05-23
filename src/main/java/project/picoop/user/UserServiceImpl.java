@@ -122,9 +122,20 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCurrentUserRole(String email) {
         return userRepository.findUserRoleByEmail(email);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long getRegisteredUsers() {
+        return userRepository.count();
     }
 
 }

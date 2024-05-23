@@ -102,4 +102,10 @@ public interface UserService {
      */
     public String getCurrentUserRole(String email);
 
+    /**
+     * 
+     * @return number of registered users in the db
+     */
+    public long getRegisteredUsers();
+
 }
