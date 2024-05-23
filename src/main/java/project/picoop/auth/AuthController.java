@@ -3,6 +3,7 @@ package project.picoop.auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,10 +63,20 @@ public class AuthController {
     /**
      * It returns the current user mail
      * 
-     * @return
+     * @return current user email
      */
     @GetMapping("/username")
     public String getCurrentUserEmail() {
         return AuthService.getCurrentUserEmail();
+    }
+
+    /**
+     * It returns the current user role
+     * 
+     * @return current user role
+     */
+    @GetMapping("/adminuser/getrole/{email}")
+    public String getCurrentUserRole(@PathVariable String email) {
+        return authService.getCurrentUserRole(email);
     }
 }

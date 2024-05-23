@@ -94,4 +94,12 @@ public interface UserService {
      */
     public void setCurrentUserCredits(int credits);
 
+    /**
+     * Returns the role of current user
+     * 
+     * @param email
+     * @return role
+     */
+    public String getCurrentUserRole(String email);
+
 }

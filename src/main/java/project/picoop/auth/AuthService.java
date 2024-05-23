@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import project.picoop.user.UserRepository;
+import project.picoop.user.UserService;
 import project.picoop.user.model.UserEntity;
 
 @Service
@@ -26,6 +27,9 @@ public class AuthService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * creates a new user with {@link ReqRes} attributes. If it succeeds, it is
@@ -129,7 +133,7 @@ public class AuthService {
     }
 
     // utils
-    // Estos tres metodos siguientes los he creado yo
+    // Estos 4 metodos siguientes los he creado yo
     /**
      * to get user in session email. Este lo he creado yo (explicado por PhegonDev)
      * 
@@ -164,5 +168,9 @@ public class AuthService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object details = authentication.getDetails(); // get other details e.t.c
         return details;
+    }
+
+    public String getCurrentUserRole(String email) {
+        return userService.getCurrentUserRole(email);
     }
 }

@@ -122,4 +122,9 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public String getCurrentUserRole(String email) {
+        return userRepository.findUserRoleByEmail(email);
+    }
+
 }
