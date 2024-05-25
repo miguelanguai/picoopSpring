@@ -39,4 +39,74 @@ public class PetitionEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 
+    /**
+     * @return petitionId
+     */
+    public Long getPetitionId() {
+        return petitionId;
+    }
+
+    /**
+     * @param petitionId new value of {@link #getPetitionId}.
+     */
+    public void setPetitionId(Long petitionId) {
+        this.petitionId = petitionId;
+    }
+
+    /**
+     * @return petitionTitle
+     */
+    public String getPetitionTitle() {
+        return petitionTitle;
+    }
+
+    /**
+     * @param petitionTitle new value of {@link #getPetitionTitle}.
+     */
+    public void setPetitionTitle(String petitionTitle) {
+        this.petitionTitle = petitionTitle;
+    }
+
+    /**
+     * @return petitionDescription
+     */
+    public String getPetitionDescription() {
+        return petitionDescription;
+    }
+
+    /**
+     * @param petitionDescription new value of {@link #getPetitionDescription}.
+     */
+    public void setPetitionDescription(String petitionDescription) {
+        this.petitionDescription = petitionDescription;
+    }
+
+    /**
+     * @return petitionDate
+     */
+    public LocalDate getPetitionDate() {
+        return petitionDate;
+    }
+
+    /**
+     * @param petitionDate new value of {@link #getPetitionDate}.
+     */
+    public void setPetitionDate(LocalDate petitionDate) {
+        this.petitionDate = petitionDate;
+    }
+
+    /**
+     * @return User
+     */
+    public UserEntity getUser() {
+        return user;
+    }
+
+    /**
+     * @param user new value of {@link #getUser}.
+     */
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
 }

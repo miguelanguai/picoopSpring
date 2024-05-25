@@ -31,14 +31,65 @@ public class UserEntity implements UserDetails {
         return List.of(new SimpleGrantedAuthority(role));
     }
 
-    @Override
-    public String getUsername() {
+    /**
+     * @return id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * @param id new value of {@link #getId}.
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * @return email
+     */
+    public String getEmail() {
         return email;
     }
 
     /**
+     * @param email value of {@link #getEmail}.
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password new value of {@link #getPassword}.
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * @return role
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * @param role new value of {@link #getRole}.
+     */
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    /**
      * 
-     * @return credits user has. can't be null
+     * @return credits
      */
     public int getCredits() {
         return this.credits;
@@ -49,6 +100,11 @@ public class UserEntity implements UserDetails {
      */
     public void setCredits(int credits) {
         this.credits = credits;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 
     @Override
